@@ -23,7 +23,7 @@ export class UVUnwrapper extends BaseUVUnwrapper{
 
         // Make sure to wait for the library to load before unwrapping.
         this._libraryPromise = super.loadLibrary(
-            (mode, progress)=>{console.log(mode, progress);},
+            (mode, progress)=>{},
             `${pathName}/dist/node/xatlas.wasm`,
             `${pathName}/dist/node/worker.mjs`,
         );
