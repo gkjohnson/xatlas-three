@@ -14,9 +14,7 @@ export default (env)=>({
     experiments: {
         outputModule: true
     },
-    externals: {
-        'node:worker_threads': 'node:worker_threads',
-    },
+    externals: /^node:.+/,
     devServer: {
         hot: false,
         port: 6237,
