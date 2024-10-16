@@ -5,6 +5,16 @@
     "module": "public/build/index.js",
     "types": "public/build/index.d.ts",
     "type": "module",
+    "exports": {
+        ".": {
+            "import": "./public/build/index.js",
+            "types": "./public/build/index.d.ts"
+        },
+        "./node": {
+            "import": "./public/build/node.js",
+            "types": "./public/build/node.d.ts"
+        }
+    },
     "source": "src/index.ts",
     "scripts": {
         "start": "webpack serve",
