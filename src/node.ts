@@ -8,31 +8,19 @@ export class UVUnwrapper extends BaseUVUnwrapper{
         return new XAtlasNodeWorker()
     }
 
-    _libraryPromise: Promise<void>|null;
-
-    constructor(...args) {
+    constructor(...args:any[]) {
         super(...args);
 
-        this._libraryPromise = this._loadLibrary();
-    }
-
-    async _loadLibrary(): Promise<void> {
         // https://stackoverflow.com/questions/54977743/do-require-resolve-for-es-modules
         const require = createRequire(import.meta.url);
         const pathName = path.dirname(require.resolve('xatlasjs/package.json'));
 
         // Make sure to wait for the library to load before unwrapping.
-        this._libraryPromise = super.loadLibrary(
+        this.loadLibrary(
             (mode, progress)=>{},
             `${pathName}/dist/node/xatlas.wasm`,
             `${pathName}/dist/node/worker.mjs`,
         );
-    }
-
-    public async packAtlas(...args): Promise<Atlas> {
-        // wait for the library to be loaded
-        await this._libraryPromise;
-        return super.packAtlas(...args);
     }
 
     exit(): Promise<void> {
